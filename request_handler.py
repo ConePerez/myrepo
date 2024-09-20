@@ -1,7 +1,7 @@
 # request_handler
 from models import User, Offer, BiddingState, TransactionState, Bid
 from base import Session
-from bid_handler import bid_handler
+# from bid_handler import bid_handler
 
 from telegram import Update
 from telegram.ext import ContextTypes
@@ -70,5 +70,5 @@ async def request_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
                 session.commit()
 
 
-async def query_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await bid_handler(update, context)
+# async def query_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+#     await bid_handler(update, context)

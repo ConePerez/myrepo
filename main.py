@@ -6,7 +6,7 @@ from http import HTTPStatus
 from telegram import Update
 from fastapi import FastAPI, Request, Response
 import os
-from request_handler import start, help_command, request_handler, query_handler
+from request_handler import start, help_command, request_handler # , query_handler
 from offer_handler import show_offers, create_offer
 from base import engine, Base, Session
 
@@ -59,4 +59,4 @@ ptb.add_handler(CommandHandler("help", help_command))
 ptb.add_handler(CommandHandler("offer", create_offer)) # Create offer
 ptb.add_handler(CommandHandler("offers", show_offers)) # See all offers
 ptb.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, request_handler))
-ptb.add_handler(CallbackQueryHandler(callback=query_handler))
+# ptb.add_handler(CallbackQueryHandler(callback=query_handler))
