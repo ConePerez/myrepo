@@ -2,10 +2,14 @@
 from models import User, Offer, BiddingState, TransactionState, Bid
 from base import Session
 # from bid_handler import bid_handler
-from main import logger
 from telegram import Update
 from telegram.ext import ContextTypes
 
+import logging
+logging.basicConfig(
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
+)
+logger = logging.getLogger(__name__)
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
