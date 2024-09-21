@@ -3,7 +3,7 @@ import enum
 
 from base import Base
 
-from sqlalchemy import Column, String, Integer, Enum, ForeignKey, Float, BigInteger
+from sqlalchemy import Column, String, Enum, ForeignKey, Float, BigInteger
 from sqlalchemy.orm import relationship
 
 
@@ -23,7 +23,7 @@ class TransactionState(enum.Enum):
 class User(Base):
     __tablename__ = 'users'
 
-    id = Column(Integer, primary_key=True)
+    id = Column(BigInteger, primary_key=True)
     name = Column(String)
     lastname = Column(String)
     username = Column(String)
@@ -45,8 +45,8 @@ class User(Base):
 class Offer(Base):
     __tablename__ = 'offers'
 
-    id = Column(Integer, primary_key=True)
-    creator_id = Column(Integer, ForeignKey('users.id'))
+    id = Column(BigInteger, primary_key=True)
+    creator_id = Column(BigInteger, ForeignKey('users.id'))
     creator = relationship("User", back_populates="offers", lazy='subquery')
     description = Column(String)
     currency = Column(String)
@@ -71,11 +71,11 @@ class Offer(Base):
 class Bid(Base):
     __tablename__ = 'bids'
 
-    id = Column(Integer, primary_key=True)
+    id = Column(BigInteger, primary_key=True)
     offer = relationship('Offer', uselist=False, back_populates='bid', lazy='subquery')
-    offer_id = Column(Integer, ForeignKey('offers.id'))
+    offer_id = Column(BigInteger, ForeignKey('offers.id'))
     bid_rate = Column(Float)
-    buyer_id = Column(Integer, ForeignKey('users.id'))
+    buyer_id = Column(BigInteger, ForeignKey('users.id'))
     buyer = relationship("User", back_populates="bids", lazy='subquery')
 
     @staticmethod
