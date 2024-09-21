@@ -3,7 +3,7 @@ import enum
 
 from base import Base
 
-from sqlalchemy import Column, String, Integer, Enum, ForeignKey, Float
+from sqlalchemy import Column, String, Integer, Enum, ForeignKey, Float, BigInteger
 from sqlalchemy.orm import relationship
 
 
@@ -27,7 +27,7 @@ class User(Base):
     name = Column(String)
     lastname = Column(String)
     username = Column(String)
-    chat_id = Column(Integer, unique=True)
+    chat_id = Column(BigInteger, unique=True)
     offers = relationship('Offer', back_populates='creator', lazy='subquery')
     bids = relationship('Bid', back_populates='buyer', lazy='subquery')
 
