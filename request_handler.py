@@ -2,9 +2,10 @@
 from models import User, Offer, BiddingState, TransactionState, Bid
 from base import Session
 # from bid_handler import bid_handler
-
+from main import logger
 from telegram import Update
 from telegram.ext import ContextTypes
+
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -13,12 +14,14 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             try: # Check if user doesnt exist create user
                 chat_id = update.message.chat_id
                 user = User.get_user_by_chat_id(session, chat_id)
+                logger.info(user)
                 if not user:
                     user = update.effective_user
                     new_user = User(name=user.name, lastname=user.last_name, username=user.username,
                                     chat_id=user.id)
                     session.add(new_user)
             except:
+                logger.info("entro a except")
                 session.rollback()
             finally:
                 session.commit()
